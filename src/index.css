@@ -1,42 +1,47 @@
-@tailwind base;
+/* Utility classes for Minecraft style */
+.font-minecraft {
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Footer animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out forwards;
+}@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Wynncraft Custom Fonts */
-@font-face {
-  font-family: 'wynn';
-  src: url('../fonts/wynn.eot');
-  src: url('../fonts/wynn.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/wynn.ttf') format('truetype'),
-       url('../fonts/wynn.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: block;
-}
-
-@font-face {
-  font-family: 'Architects Daughter';
-  src: url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
-}
-
-/* Import Ubuntu Font as fallback */
+/* Import Ubuntu Font */
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700;800&display=swap');
 
-/* Root variables from Wynncraft */
+/* Minecraft Font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Root variables - Dark Theme */
 :root {
-  --theme-col-bg: rgb(135,119,101);
-  --theme-col-top: rgb(178,155,128);
-  --theme-col-bot: rgb(111,92,79);
-  --text-color-nav: rgb(65,38,36);
-  --text-color-nav-light: rgb(255,255,255);
-  --container-bg: rgb(186,170,128);
-  --nav-shadow: 0 0 0 5px #8b785b, 0 0 0 8px #412624, 0 0 0 10px #8b785b, 0 0 0 12px #624e3c, 0 0 0 15px #412624, 0 0 0 18px #00000031;
+  --theme-col-bg: rgb(61, 43, 31);
+  --theme-col-top: rgb(78, 55, 40);
+  --theme-col-bot: rgb(46, 32, 23);
+  --text-color-nav: rgb(255, 223, 127);
+  --text-color-nav-light: rgb(255, 245, 200);
+  --container-bg: rgb(46, 32, 23);
+  --nav-shadow: 0 0 0 5px #3d2b1f, 0 0 0 8px #2e2014, 0 0 0 10px #3d2b1f, 0 0 0 12px #1f150f, 0 0 0 15px #2e2014, 0 0 0 18px rgba(0,0,0,0.5);
   --basic-trans: .3s ease;
   --med-trans: .5s ease;
   --slow-trans: 1s ease;
 }
 
-/* Navigation from Wynncraft */
+/* Navigation - Dark Theme */
 nav {
   background-color: var(--container-bg);
   box-shadow: var(--nav-shadow);
@@ -69,13 +74,12 @@ nav {
   text-decoration: none !important;
 }
 
-/* Navigation button */
+/* Navigation button - USING WOOD TEXTURE */
 .nav-button {
-  background-color: var(--theme-col-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%239A8976;stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:%23877765;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%236F5E4C;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='30' fill='url(%23grad)' stroke='%23412624' stroke-width='3'/%3E%3C/svg%3E");
+  background-image: url('/images/nav-btn-bg.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  box-shadow: 0 0 0 3px var(--text-color-nav);
+  box-shadow: 0 0 0 3px #2e2014, inset 0 -2px 4px rgba(0,0,0,0.5);
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -83,18 +87,44 @@ nav {
   justify-content: center;
   margin: 0 5px;
   min-width: 100px;
-  transition: opacity var(--med-trans), transform var(--med-trans);
+  transition: all var(--med-trans);
+  filter: brightness(0.85);
+  position: relative;
 }
 
-/* Gold navigation button */
+/* Dark overlay for regular buttons */
+.nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+/* Gold navigation button - USING GOLD WOOD TEXTURE */
 .gold-nav-btn {
-  background-color: #ffe071;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Cdefs%3E%3ClinearGradient id='goldgrad' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFE571;stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:%23FFD962;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23E6C04F;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='30' fill='url(%23goldgrad)' stroke='%23412624' stroke-width='3'/%3E%3C/svg%3E");
+  background-image: url('/images/nav-btn-gold-bg.png');
+  filter: brightness(0.9);
+  box-shadow: 0 0 0 3px #3d2b1f, inset 0 -2px 4px rgba(0,0,0,0.3);
+}
+
+.gold-nav-btn::before {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.25));
 }
 
 .nav-button:hover {
   transform: scale(1.02);
-  transition: var(--basic-trans);
+  transition: all var(--basic-trans);
+  filter: brightness(1);
+  box-shadow: 0 0 0 3px #2e2014, inset 0 -2px 4px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.gold-nav-btn:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 0 0 3px #3d2b1f, inset 0 -2px 4px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.5);
 }
 
 /* Button text */
@@ -102,32 +132,42 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: large;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
   justify-content: center;
-  padding: 0 5px;
+  padding: 0 10px;
   width: fit-content;
   color: var(--text-color-nav);
   transition: var(--slow-trans);
+  gap: 6px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.5px;
 }
 
-.nav-btn-text svg {
-  margin-right: 5px;
-  width: 16px;
-  height: 16px;
+.nav-icon {
   color: var(--text-color-nav);
   transition: var(--slow-trans);
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
 }
 
 .nav-button:hover .nav-btn-text,
-.nav-button:hover .nav-btn-text svg {
+.nav-button:hover .nav-icon {
   color: var(--text-color-nav-light);
   transition: var(--med-trans);
 }
 
 .gold-nav-btn.nav-button .nav-btn-text,
-.gold-nav-btn:not(.nav-button):hover .nav-btn-text {
-  color: var(--text-color-nav) !important;
+.gold-nav-btn.nav-button .nav-icon {
+  color: rgb(46, 32, 23) !important;
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
+  font-weight: 800;
+}
+
+.gold-nav-btn:hover .nav-btn-text,
+.gold-nav-btn:hover .nav-icon {
+  color: rgb(31, 21, 15) !important;
 }
 
 /* Shine effect */
@@ -161,21 +201,6 @@ nav {
   }
 }
 
-/* Wynncraft icons */
-.wynn-font {
-  font-family: 'wynn', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  margin-right: 5px;
-}
-
-.wi-home:before { content: '\e900'; }
-.wi-news:before { content: '\e901'; }
-.wi-store:before { content: '\e902'; }
-.wi-community:before { content: '\e903'; }
-.wi-stats:before { content: '\e904'; }
-.wi-items:before { content: '\e905'; }
-
 .center-cover-bg {
   background-position: center;
   background-size: cover;
@@ -200,4 +225,32 @@ nav {
 
 .justify-space-between {
   justify-content: space-between;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Utility classes for Minecraft style */
+.font-minecraft {
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Footer shine animation */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

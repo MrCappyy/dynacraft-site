@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'  // <-- MAKE SURE THIS LINE EXISTS
 
 function App() {
   return (
@@ -28,11 +29,12 @@ function App() {
         ))}
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10">
-        <Navbar />
+      {/* Navigation */}
+      <Navbar />
 
-        <main className="container mx-auto px-4 py-16">
+      {/* Main content */}
+      <main className="relative z-10 pt-[50px] pb-[60px]">
+        <div className="container mx-auto px-4 py-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -81,8 +83,11 @@ function App() {
               <p className="text-gray-300">Battle players and conquer challenging dungeon raids</p>
             </div>
           </motion.div>
-        </main>
-      </div>
+        </div>
+      </main>
+
+      {/* Footer - MAKE SURE THIS LINE EXISTS */}
+      <Footer />
     </div>
   )
 }

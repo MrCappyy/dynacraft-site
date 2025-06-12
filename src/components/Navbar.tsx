@@ -1,11 +1,13 @@
+import { Home, FileText, Users, BarChart3, MessageCircle, Briefcase } from 'lucide-react'
+
 const Navbar = () => {
   const navItems = [
-    { icon: 'home', label: 'home', href: '/' },
-    { icon: 'news', label: 'about project', href: '/about' },
-    { icon: 'store', label: 'apply for dev', href: '/apply', gold: true },
-    { icon: 'community', label: 'team', href: '/team' },
-    { icon: 'stats', label: 'changelog', href: '/changelog' },
-    { icon: 'items', label: 'discord', href: 'https://discord.gg/your-invite', external: true },
+    { Icon: Home, label: 'Home', href: '/' },
+    { Icon: FileText, label: 'About Project', href: '/about' },
+    { Icon: Briefcase, label: 'Apply For Dev', href: '/apply', gold: true },
+    { Icon: Users, label: 'Team', href: '/team' },
+    { Icon: BarChart3, label: 'Changelog', href: '/changelog' },
+    { Icon: MessageCircle, label: 'Discord', href: 'https://discord.gg/your-invite', external: true },
   ]
 
   return (
@@ -22,10 +24,13 @@ const Navbar = () => {
             <div 
               className={`fade-in nav-button center-cover-bg wynn-shine ${item.gold ? 'gold-nav-btn' : ''}`}
               style={{ '--shine-height': '30px', '--shine-width': '100px' } as React.CSSProperties}
+              aria-label="Wynn Navigation Button"
             >
               <p className="nav-btn-text capitalize align-center aR">
-                <i className={`wi-${item.icon} wynn-font`}></i> {item.label}
+                <item.Icon className="nav-icon" size={16} />
+                {item.label}
               </p>
+              <div className="wynn-shine-worker"></div>
             </div>
           </a>
         ))}
